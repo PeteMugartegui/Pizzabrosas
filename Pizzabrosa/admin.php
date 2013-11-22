@@ -15,12 +15,18 @@
 <body>
 	<nav class="barra">
 		<img src="pizzabrosas.png" class="logo">
-		<ul class="iniciosec">
-			<li><a href="iniciasesion.php">Inicio de sesión</a></li>
-			<li><a href="registro.php">Registrarse</a></li>
+		<ul class="iniciosec" style="font-size:14px;">
+			<li>
+				<a href="">
+					<?php
+					echo "Bienvenido   ".$_COOKIE['username'] ." !";
+					?>
+				</a>
+			</li>
+			<li><a href="Logout.php">Cerrar Sesión</a></li>
 		</ul>
 	<nav class="barra-admin"> 
-		<ul style="margin-left:40%;">
+		<ul style="margin-left:40%; font-size:14px; padding:13px;">
 			<li><a class="active" href="#">Pedidos</a></li>
 			<li><a href="admin-esp.php">Especialidades</a></li>
 			<li><a href="admin-ing.php">Ingredientes</a></li>

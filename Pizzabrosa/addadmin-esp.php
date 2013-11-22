@@ -16,4 +16,5 @@
              					die('Error de insercion'.mysql_error());
         					}
         					header('refresh:.1; url=http://localhost/Pizzabrosa/admin-esp.php'); 
-        					?>
+        					
+?>

@@ -105,8 +105,7 @@
 						}
 						$row=mysql_fetch_array($user);
 						$usr=$row['username'];
-						echo "<script>"."alert('$rd')"."</script>";
-						echo "<script>"."alert('$usr')"."</script>";
+					
 						/****************************** Inserccion de datos**********************/
 						$consulta="INSERT INTO pedidos(user,tamano,ingredientes,extra,precio,direccion)
 						VALUES ('$usr','$tam','$array_string','$posref','$PTotal1','$rd')";
@@ -138,7 +137,7 @@
 						}
 						$row=mysql_fetch_array($direccion);
 						$rd=$row['direccion'];
-						echo "<script>"."alert('$rd')"."</script>";
+						
 						/***********************************Obtener Usename*****************************/
 						$user=mysql_query("SELECT username FROM usuario WHERE username LIKE '$cuki' ", $con);
 						if($user === FALSE) {
@@ -159,7 +158,7 @@
 					}
 						$_SESSION['Precio']=$Precio;
 				?>
-				<a class="boton" href="datos.php">Continuar.</a>
+				<a class="boton" href="Logout.php">Continuar.</a>
 			</div>
 		</section>
 </body>

@@ -27,6 +27,7 @@
 		</ul>
 	<nav class="barra-admin"> 
 		<ul style="margin-left:40%; font-size:14px; padding:13px;">
+
 			<li><a href="admin.php">Pedidos</a></li>
 			<li><a class="active" href="#">Especialidades</a></li>
 			<li><a href="admin-ing.php">Ingredientes</a></li>
@@ -36,35 +37,41 @@
 		<section class="wrapper" id="pizza">
 			<div id="fondo" style="height:100%;">
 				<div class="centrado" style="color:#FFF; font-family: 'Open Sans Condensed', sans-serif; font-size:16px; margin-left:650px; margin-top:50px;">
-					<form action="addadmin-esp.php" METHOD="POST">
-						<?php 
-							if (isset($_REQUEST['NewEsp'])) {
-								$_SESSION['NewEsp'] = $_POST['NewEsp'];
+					
+						<?php
+							$bdhost = "localhost"; 
+							$bdtabla = "especialidades";
+							$bdusuario = "root"; 
+							$bdclave = "";
+							$bdname = "pizzabrosas"; 
+							$accion="";
+							if(isset($_POST['accion'])){$accion=$_POST['accion'];}
+							if(isset($_POST['id_usuario'])){$id=$_POST['id_usuario'];}
+							//$id = $_POST['idusuario'];
+							$db = mysql_connect($bdhost,$bdusuario,$bdclave); 
+							mysql_select_db($bdname) or die(mysql_error());
+							if($accion == "eliminar" && $id)  {
+							    mysql_query("DELETE FROM especialidades WHERE id='$id'");
+							     header('refresh:.1; url=http://localhost/Pizzabrosa/elimining.php');
 							}
-							$link = mysql_connect("localhost", "root",""); 
-							$bd_seleccionada = mysql_select_db('pizzabrosas', $link);
-							if (!$bd_seleccionada) {
-		    					die ('No se puede usar pizzabrosas : ' . mysql_error());
+
+							$query = "SELECT * FROM especialidades "; 
+							$resultado = mysql_query($query);
+							while($r = mysql_fetch_array($resultado)) {
+							    $id = $r['id'];
+							    $usuario = $r['nombre'];
+							    echo "<form method='post'>
+									<table border = '1' bordercolor='white'>  
+							    	<tr><td>".$usuario."</td></tr>"."<tr><td><input type=hidden name='id_usuario' value=$id>
+							    	<input type=hidden name='accion' value='eliminar'>
+							        <input type=submit name='submit' value='ELIMINAR'>
+							        </table>
+							        </form>";
 							}
-							mysql_select_db("Pizzabrosas", $link); 
-							$result = mysql_query("SELECT nombre FROM especialidades", $link); 
-							if($result === FALSE) {
-		    					die(mysql_error()); // TODO: better error handling
-							}
-							if ($row = mysql_fetch_array($result)){ 
-		   						echo "<table border = '1' bordercolor='white'> \n"; 
-		   						do { 
-		      						echo "<tr><td>"."<label class='esp-pizza'>".$row['nombre']."</label><br>"."</td></tr> \n"; 
-		   						} while ($row = mysql_fetch_array($result)); 
-		   						echo "</table> \n"; 
-							} else { 
-							echo "¡ No se ha encontrado ningún registro !"; 
-							} 
-						?> 
-						Agregar Nueva Especialidad<br> <input name="NewEsp" type="text"/><br>
-						<input type="submit" value="Agregar"><br> o <br>
-						<a href="http://localhost/Pizzabrosa/elimin.php">Eliminar Especialidades</a>
-					</form>
+							mysql_close($db);
+						?>
+					<a href="http://localhost/Pizzabrosa/admin-esp.php">Agregar Especialidades</a>				
+					
 				</div>
 			</div>
 		</section>

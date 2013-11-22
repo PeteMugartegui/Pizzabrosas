@@ -15,12 +15,18 @@
 <body>
 	<nav class="barra">
 		<img src="pizzabrosas.png" class="logo">
-		<ul class="iniciosec">
-			<li><a href="iniciasesion.php">Inicio de sesión</a></li>
-			<li><a href="registro.php">Registrarse</a></li>
+		<ul class="iniciosec" style="font-size:14px;">
+			<li>
+				<a href="">
+					<?php
+					echo "Bienvenido   ".$_COOKIE['username'] ." !";
+					?>
+				</a>
+			</li>
+			<li><a href="Logout.php">Cerrar Sesión</a></li>
 		</ul>
 	<nav class="barra-admin"> 
-		<ul style="margin-left:40%;">
+		<ul style="margin-left:40%; font-size:14px; padding:13px;">
 			<li><a href="admin.php">Pedidos</a></li>
 			<li><a href="admin-esp.php">Especialidades</a></li>
 			<li><a class="active" href="#">Ingredientes</a></li>
@@ -45,7 +51,7 @@
 						if ($row = mysql_fetch_array($result)){ 
 	   						echo "<table border = '0'> \n"; 
 	   						do { 
-	      						echo "<tr><td>"."<input id='ing'  type='checkbox' name='ingredientes[]'' value="."$row[nombre]>"."<label class='ing-pizza'>".$row['nombre']."</label><br>"."</td></tr> \n"; 
+	      						echo "<tr><td>"."<label class='ing-pizza'>".$row['nombre']."</label><br>"."</td></tr> \n"; 
 	   						} while ($row = mysql_fetch_array($result)); 
 	   						echo "</table> \n"; 
 						} else { 
@@ -54,6 +60,8 @@
 						?>
 						Agregar Nuevo Ingrediente<br> <input name="NewIng" type="text"/><br>
 						<input type="submit" value="Agregar">
+						<br> o <br>
+						<a href="http://localhost/Pizzabrosa/elimining.php">Eliminar Ingredientes</a>
 					</form>
 				</div>
 			</div>
